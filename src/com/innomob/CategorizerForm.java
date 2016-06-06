@@ -2,8 +2,8 @@ package com.innomob;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -25,7 +25,7 @@ public class CategorizerForm {
     private CategorizerForm _this;
     private Properties properties;
 
-    public CategorizerForm() {
+    private CategorizerForm() {
 
         _this = this;
         try {
@@ -73,10 +73,16 @@ public class CategorizerForm {
 
             result.setText(sb.toString());
         });
-        clearButton.addActionListener(new ActionListener() {
+        clearButton.addActionListener(e -> {
+            input.setText("");
+            input.requestFocus();
+        });
+        input.addKeyListener(new KeyAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                input.setText("");
+            public void keyReleased(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    calculateButton.doClick();
+                }
             }
         });
     }
