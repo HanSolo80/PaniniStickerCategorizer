@@ -6,10 +6,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
 import java.util.List;
-import java.util.Properties;
 import java.util.stream.Collectors;
 
 /**
@@ -48,11 +46,14 @@ public class CategorizerForm {
             int numStarting = 0;
             int numEm = 0;
 
+            List<Integer> glitterNums = new ArrayList<>();
+
             StringBuilder sb = new StringBuilder();
 
             for (Integer i : inputList) {
                 if (glitterList.contains(i)) {
                     numGlitters++;
+                    glitterNums.add(i);
                 } else if (captainList.contains(i)) {
                     numCaptains++;
                 } else if (startingList.contains(i)) {
@@ -66,7 +67,18 @@ public class CategorizerForm {
 
 
             sb.append("Normal: ").append(numNormal).append("\n");
-            sb.append("Glitters: ").append(numGlitters).append("\n");
+            sb.append("Glitters: ").append(numGlitters);
+            if (glitterNums.size() > 0) {
+                sb.append(" (");
+                for (int i = 0; i < glitterNums.size(); i++) {
+                    sb.append(glitterNums.get(i));
+                    if ((i + 1) < glitterNums.size()) {
+                        sb.append(", ");
+                    }
+                }
+                sb.append(")");
+            }
+            sb.append("\n");
             sb.append("EM: ").append(numEm).append("\n");
             sb.append("Captains: ").append(numCaptains).append("\n");
             sb.append("Starting: ").append(numStarting).append("\n");
