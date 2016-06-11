@@ -11,7 +11,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Created by Christoph on 03.06.2016.
+ * Categorizes Panini Sticker List into the specific categories defined in properties file
+ * @author Christoph Kau
+ *
  */
 public class CategorizerForm {
 
@@ -35,16 +37,17 @@ public class CategorizerForm {
             List<Integer> inputList = Arrays.asList(input.getText().replaceAll("\\s+", "").split(",")).stream().mapToInt
                     (_this::convertStringToInteger).boxed().filter(x -> x != 0).collect(Collectors.toList());
 
-            List<Integer> glitterList = readStickerListByName("glitter");
-            List<Integer> captainList = readStickerListByName("captain");
-            List<Integer> startingList = readStickerListByName("starting");
-            List<Integer> emList = readStickerListByName("em");
+            List glitterList = readStickerListByName("glitter");
+            List captainList = readStickerListByName("captain");
+            List startingList = readStickerListByName("starting");
+            List emList = readStickerListByName("em");
 
             int numNormal = 0;
             int numGlitters = 0;
             int numCaptains = 0;
             int numStarting = 0;
             int numEm = 0;
+            int numTotal = 0;
 
             List<Integer> glitterNums = new ArrayList<>();
 
@@ -63,6 +66,7 @@ public class CategorizerForm {
                 } else {
                     numNormal++;
                 }
+                numTotal++;
             }
 
 
@@ -82,6 +86,7 @@ public class CategorizerForm {
             sb.append("EM: ").append(numEm).append("\n");
             sb.append("Captains: ").append(numCaptains).append("\n");
             sb.append("Starting: ").append(numStarting).append("\n");
+            sb.append("\nTotal: ").append(numTotal);
 
             result.setText(sb.toString());
         });
@@ -122,7 +127,7 @@ public class CategorizerForm {
         return properties;
     }
 
-    private List<Integer> readStickerListByName(String name) {
+    private List readStickerListByName(String name) {
         return convertPropertyStringToList(properties.getProperty(name));
     }
 
