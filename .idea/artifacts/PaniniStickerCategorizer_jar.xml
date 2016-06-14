@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="PaniniStickerCategorizer:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/PaniniStickerCategorizer_jar</output-path>
+    <root id="archive" name="PaniniStickerCategorizer.jar">
+      <element id="module-output" name="PaniniStickerCategorizer" />
+    </root>
+  </artifact>
+</component>
